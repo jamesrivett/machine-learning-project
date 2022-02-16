@@ -1,3 +1,3 @@
 # machine-learning-project
 ## Authors:
-### Vishal Patel & James Rivett
+Vishal Patel & James Rivett
