@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
+from copy import deepcopy
 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
@@ -14,20 +15,29 @@ from keras.layers import LSTM
 
 
 # Globals
+# API
 global COIN_SYMBOL; COIN_SYMBOL = 'BTC'
 global PERIOD_ID; PERIOD_ID = '1DAY'
 global START_DATE; START_DATE = '2021-01-01'
 global END_DATE; END_DATE = '2022-02-01'
+global LIMIT; LIMIT = 1000
 global API_KEY; API_KEY = '53663783-E96C-4CF7-A3F4-0F8D59946927'
-global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&apikey={}&output_format=csv'.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, API_KEY)
+global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&limit={}&apikey={}&output_format=csv'.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
+
+# Dataframe
+global TRAIN_TEST_SPLIT_DATE; TRAIN_TEST_SPLIT_DATE = '2021-03-25T00:00:00.0000000Z'
+global LOOK_BACK; LOOK_BACK = 10
+
+# Training
+global NUM_EPOCHS; NUM_EPOCHS = 200
 
 # convert an array of values into a dataset matrix
-def create_dataset(dataset, look_back=1):
+def create_dataset(dataset, lookBack=1):
   dataX, dataY = [], []
-  for i in range(len(dataset)-look_back-1):
-    a = dataset[i:(i+look_back), 0]
+  for i in range(len(dataset)-lookBack-1):
+    a = dataset[i:(i+lookBack), 0]
     dataX.append(a)
-    dataY.append(dataset[i + look_back, 0])
+    dataY.append(dataset[i + lookBack, 0])
   return np.array(dataX), np.array(dataY)
 
 def main():
@@ -36,13 +46,12 @@ def main():
     print(data)
 
     # Create Dataframe
-    df = data.loc[(data['rpt_key'] == 'btc_usd')]
-    df = df.reset_index(drop=True)
-    df['datetime'] = pd.to_datetime(df['datetime_id'])
-    df = df.loc[df['datetime'] > pd.to_datetime('2017-06-28 00:00:00')]
-    df = df[['last']]
+    df = deepcopy(data)
+    df['datetime'] = pd.to_datetime(df['time_period_start'])
+    df = df[['rate_open']]
     dataset = df.values
     dataset = dataset.astype('float32')
+    print(dataset)
 
     # Scale Data Frame
     scaler = MinMaxScaler(feature_range=(0, 1))
@@ -54,9 +63,8 @@ def main():
     train, test = dataset[0:train_size, :], dataset[train_size:len(dataset), :]
 
     # Create Data Sets
-    look_back = 10
-    trainX, trainY = create_dataset(train, look_back=look_back)
-    testX, testY = create_dataset(test, look_back=look_back)
+    trainX, trainY = create_dataset(train, lookBack=LOOK_BACK)
+    testX, testY = create_dataset(test, lookBack=LOOK_BACK)
 
     # Reshape input to be [samples, time steps, features]
     trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
@@ -64,10 +72,10 @@ def main():
 
     # Build Model
     model = Sequential()
-    model.add(LSTM(4, input_shape=(1, look_back)))
+    model.add(LSTM(4, input_shape=(1, LOOK_BACK)))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam')
-    model.fit(trainX, trainY, epochs=100, batch_size=256, verbose=2)
+    model.fit(trainX, trainY, epochs=NUM_EPOCHS, batch_size=256, verbose=2)
 
     # Make Predictions
     trainPredict = model.predict(trainX)
@@ -88,13 +96,13 @@ def main():
     # Plot Results
     trainPredictPlot = np.empty_like(dataset)
     trainPredictPlot[:, :] = np.nan
-    trainPredictPlot[look_back:len(trainPredict) + look_back, :] = trainPredict
+    trainPredictPlot[LOOK_BACK:len(trainPredict) + LOOK_BACK, :] = trainPredict
     testPredictPlot = np.empty_like(dataset)
     testPredictPlot[:, :] = np.nan
-    testPredictPlot[len(trainPredict) + (look_back * 2) + 1:len(dataset) - 1, :] = testPredict
-    plt.plot(df['last'], label='Actual')
-    plt.plot(pd.DataFrame(trainPredictPlot, columns=["close"], index=df.index).close, label='Training')
-    plt.plot(pd.DataFrame(testPredictPlot, columns=["close"], index=df.index).close, label='Testing')
+    testPredictPlot[len(trainPredict) + (LOOK_BACK * 2) + 1:len(dataset) - 1, :] = testPredict
+    plt.plot(df['rate_open'], label='Actual')
+    plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_close"], index=df.index).rate_close, label='Training')
+    plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_close"], index=df.index).rate_close, label='Testing')
     plt.legend(loc='best')
     plt.show()
 

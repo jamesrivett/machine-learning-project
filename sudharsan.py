@@ -30,9 +30,12 @@ def main():
     df = df.reset_index(drop=True)
     df['datetime'] = pd.to_datetime(df['datetime_id'])
     df = df.loc[df['datetime'] > pd.to_datetime('2017-06-28 00:00:00')]
+    print("after adding new date col:")
     df = df[['last']]
+    print("after selecting just last price:")
     dataset = df.values
     dataset = dataset.astype('float32')
+    print(dataset)
 
     # Scale Data Frame
     scaler = MinMaxScaler(feature_range=(0, 1))
