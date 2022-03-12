@@ -22,13 +22,10 @@ global START_DATE; START_DATE = '2021-01-01'
 global END_DATE; END_DATE = '2022-02-01'
 global LIMIT; LIMIT = 1000
 global API_KEY; API_KEY = '53663783-E96C-4CF7-A3F4-0F8D59946927'
-global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&limit={}&apikey={}&output_format=csv'.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
-
-# Dataframe
-global TRAIN_TEST_SPLIT_DATE; TRAIN_TEST_SPLIT_DATE = '2021-03-25T00:00:00.0000000Z'
-global LOOK_BACK; LOOK_BACK = 10
+global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&limit={}&apikey={}&output_format=csv'
 
 # Training
+global LOOK_BACK; LOOK_BACK = 10
 global NUM_EPOCHS; NUM_EPOCHS = 200
 
 # convert an array of values into a dataset matrix
@@ -40,9 +37,10 @@ def create_dataset(dataset, lookBack=1):
     dataY.append(dataset[i + lookBack, 0])
   return np.array(dataX), np.array(dataY)
 
-def main():
+def doPrediction(coinSymbol, periodID, startDate, endDate, limit, apiKey):
     # Import BTC/USD data
-    data = pd.read_csv(REQUEST_URL, sep=';')
+    url = REQUEST_URL.format(coinSymbol, periodID, startDate, endDate, limit, apiKey)
+    data = pd.read_csv(url, sep=';')
     print(data)
 
     # Create Dataframe
@@ -108,4 +106,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    doPrediction(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
