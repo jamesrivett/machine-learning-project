@@ -7,3 +7,4 @@ Vishal Patel & James Rivett
 - https://github.com/sudharsan13296/Bitcoin-price-Prediction-using-LSTM
 - https://finance.yahoo.com/quote/BTC-USD/history?period1=1609459200&period2=1640908800&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true
 - https://www.forbes.com/advisor/investing/top-10-cryptocurrencies/
+- https://docs.coinapi.io/?shell#output-data-format
