@@ -14,6 +14,7 @@ from keras.layers import Dense
 from keras.layers import LSTM
 
 # Globals
+# Hello World
 # REQUEST URL Vars, These are default values. The UI will change them before making the reuquest.
 global COIN_SYMBOL; COIN_SYMBOL = 'BTC'
 global PERIOD_ID; PERIOD_ID = '1DAY'
