@@ -40,11 +40,12 @@ def create_dataset(dataset, lookBack=1):
   return np.array(dataX), np.array(dataY)
 
 def getPeriod(period):
-  values = {"1 Hour": "1HR", "12 hour": "12HRS", "Day": "1DAY", "Week": "7DAY"}
+  values = {"1 Hour": "1HRS", "12 hour": "12HRS", "Day": "1DAY", "Week": "7DAY"}
   return values[period]
 
 def getSymbol(symbol):
   values = {"Bitcoin": "BTC",  "Ethereum": "ETH", "Tether": "ETH", "ADA": "ADA",  "DogeCoin": "DOGE", "AVAX":  "AVAX",  "XTZ": "XTZ",  "ShibaCoin": "SHIB",  "DOT": "DOT", "SOL": "SOL"}
+  return values[symbol]
 
 def doPrediction(btn):
   # Harvest Inputs
@@ -92,9 +93,12 @@ def doPrediction(btn):
   trainX, trainY = create_dataset(train, lookBack=LOOK_BACK)
   testX, testY = create_dataset(test, lookBack=LOOK_BACK)
 
-  # Reshape input to be [samples, time steps, features]
-  trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
-  testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
+  try:
+    # Reshape input to be [samples, time steps, features]
+    trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
+    testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
+  except(Exception):
+    print("Not enough data! Choose a larger timeframe or a smaller trading interval.")
 
   # Build Model
   model = Sequential()
