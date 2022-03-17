@@ -27,6 +27,7 @@ global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/US
 # Training
 global LOOK_BACK; LOOK_BACK = 10
 global NUM_EPOCHS; NUM_EPOCHS = 200
+global BATCH_SIZE; BATCH_SIZE = 256
 
 app = gui("ML Final Project", " 800x900")
 
@@ -105,7 +106,7 @@ def doPrediction(btn):
   model.add(LSTM(4, input_shape=(1, LOOK_BACK)))
   model.add(Dense(1))
   model.compile(loss='mean_squared_error', optimizer='adam')
-  model.fit(trainX, trainY, epochs=NUM_EPOCHS, batch_size=256, verbose=2)
+  model.fit(trainX, trainY, epochs=NUM_EPOCHS, batch_size=BATCH_SIZE, verbose=2)
 
   # Make Predictions
   trainPredict = model.predict(trainX)
