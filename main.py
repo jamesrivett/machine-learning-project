@@ -132,9 +132,10 @@ def doPrediction(btn):
   testPredictPlot[:, :] = np.nan
   testPredictPlot[len(trainPredict) + (LOOK_BACK * 2) + 1:len(dataset) - 1, :] = testPredict
   plt.plot(df['rate_open'], label='Actual')
-  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=df.index).rate_close, label='Training')
-  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=df.index).rate_close, label='Testing')
+  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Training')
+  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Testing')
   plt.legend(loc='best')
+  plt.xticks(np.arange(0, len(data['time_period_start']), len(data['time_period_start']) / 20 ), rotation=85)
   plt.show()
 
 

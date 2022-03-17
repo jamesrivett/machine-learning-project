@@ -41,7 +41,7 @@ def main():
   # Import BTC/USD data
   url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
-  data = pd.read_csv(url, sep=';')
+  data = pd.read_csv('test.csv', sep=';')
   data['datetime'] = pd.to_datetime(data['time_period_start'])
   print(data)
 
@@ -104,9 +104,10 @@ def main():
   testPredictPlot[:, :] = np.nan
   testPredictPlot[len(trainPredict) + (LOOK_BACK * 2) + 1:len(dataset) - 1, :] = testPredict
   plt.plot(df['rate_open'], label='Actual')
-  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=df.index).rate_close, label='Training')
-  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=df.index).rate_close, label='Testing')
+  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Training')
+  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Testing')
   plt.legend(loc='best')
+  plt.xticks(np.arange(0, len(data['time_period_start']), len(data['time_period_start']) / 20 ), rotation=85)
   plt.show()
 
 if __name__ == "__main__":
