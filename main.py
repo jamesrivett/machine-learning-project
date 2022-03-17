@@ -28,6 +28,7 @@ global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/US
 global LOOK_BACK; LOOK_BACK = 10
 global NUM_EPOCHS; NUM_EPOCHS = 200
 global BATCH_SIZE; BATCH_SIZE = 256
+global TT_SPLIT; TT_SPLIT = .67
 
 app = gui("ML Final Project", " 800x900")
 
@@ -86,7 +87,7 @@ def doPrediction(btn):
   dataset = scaler.fit_transform(dataset)
 
   # Define Training and Testing Boundaries
-  train_size = int(len(dataset) * 0.67)
+  train_size = int(len(dataset) * TT_SPLIT)
   test_size = len(dataset) - train_size
   train, test = dataset[0:train_size, :], dataset[train_size:len(dataset), :]
 
