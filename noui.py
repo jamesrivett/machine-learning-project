@@ -17,7 +17,7 @@ from keras.layers import LSTM
 # REQUEST URL Vars, These are default values. The UI will change them before making the reuquest.
 global COIN_SYMBOL; COIN_SYMBOL = 'BTC'
 global PERIOD_ID; PERIOD_ID = '1DAY'
-global START_DATE; START_DATE = '2021-01-01'
+global START_DATE; START_DATE = '2020-01-01'
 global END_DATE; END_DATE = '2022-02-01'
 global LIMIT; LIMIT = 1000
 global API_KEY; API_KEY = '53663783-E96C-4CF7-A3F4-0F8D59946927'
@@ -25,7 +25,7 @@ global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/US
 
 # Training
 global LOOK_BACK; LOOK_BACK = 10
-global NUM_EPOCHS; NUM_EPOCHS = 200
+global NUM_EPOCHS; NUM_EPOCHS = 400
 global BATCH_SIZE; BATCH_SIZE = 256
 
 # convert an array of values into a dataset matrix
@@ -42,11 +42,11 @@ def main():
   url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
   data = pd.read_csv(url, sep=';')
+  data['datetime'] = pd.to_datetime(data['time_period_start'])
   print(data)
 
   # Create Dataframe
   df = deepcopy(data)
-  df['datetime'] = pd.to_datetime(df['time_period_start'])
   df = df[['rate_open']]
   dataset = df.values
   dataset = dataset.astype('float32')

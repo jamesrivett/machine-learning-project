@@ -68,14 +68,14 @@ def doPrediction(btn):
   
 
   # Import BTC/USD data
-  url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, str(START_DATE.date()), str(END_DATE.date()), LIMIT, API_KEY)
+  url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
   data = pd.read_csv(url, sep=';')
+  data['datetime'] = pd.to_datetime(data['time_period_start'])
   print(data)
 
   # Create Dataframe
   df = deepcopy(data)
-  df['datetime'] = pd.to_datetime(df['time_period_start'])
   df = df[['rate_open']]
   dataset = df.values
   dataset = dataset.astype('float32')
