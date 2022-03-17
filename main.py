@@ -60,7 +60,7 @@ def doPrediction(btn):
   symbol = app.getOptionBox("Select a Crypto")
 
   # Build URL Variables
-  CON_SYMBOL = getSymbol(symbol)
+  COIN_SYMBOL = getSymbol(symbol)
   PERIOD_ID = getPeriod(period)
   START_DATE = dt.datetime(int(StartingYear), int(StartingMonth), int(StartingDay))
   END_DATE = dt.datetime(int(EndingYear), int(EndingMonth), int(EndingDay))
