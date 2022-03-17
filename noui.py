@@ -17,10 +17,11 @@ from keras.layers import LSTM
 # REQUEST URL Vars, These are default values. The UI will change them before making the reuquest.
 global COIN_SYMBOL; COIN_SYMBOL = 'BTC'
 global PERIOD_ID; PERIOD_ID = '1DAY'
-global START_DATE; START_DATE = '2020-01-01'
-global END_DATE; END_DATE = '2022-02-01'
+global START_DATE; START_DATE = '2015-01-01'
+global END_DATE; END_DATE = '2016-02-01'
 global LIMIT; LIMIT = 1000
 global API_KEY; API_KEY = '53663783-E96C-4CF7-A3F4-0F8D59946927'
+global API_KEY2; API_KEY2 = '9117E3A0-8011-4C76-830D-F7BFB6D96199'
 global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&limit={}&apikey={}&output_format=csv'
 
 # Training
@@ -42,7 +43,7 @@ def main():
   # Import BTC/USD data
   url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
-  data = pd.read_csv(url, sep=';')
+  data = pd.read_csv('test.csv', sep=';')
   data['datetime'] = pd.to_datetime(data['time_period_start'])
   print(data)
 
@@ -72,6 +73,7 @@ def main():
     testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
   except(Exception):
     print("Not enough data! Choose a larger timeframe or a smaller trading interval.")
+    return
 
   # Build Model
   model = Sequential()
@@ -104,9 +106,10 @@ def main():
   testPredictPlot[:, :] = np.nan
   testPredictPlot[len(trainPredict) + (LOOK_BACK * 2) + 1:len(dataset) - 1, :] = testPredict
   plt.plot(df['rate_open'], label='Actual')
-  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_close"], index=df.index).rate_close, label='Training')
-  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_close"], index=df.index).rate_close, label='Testing')
+  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Training')
+  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Testing')
   plt.legend(loc='best')
+  plt.xticks(np.arange(0, len(data['time_period_start']), len(data['time_period_start']) / 20 ), rotation=85)
   plt.show()
 
 if __name__ == "__main__":
