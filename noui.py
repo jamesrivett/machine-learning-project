@@ -39,7 +39,7 @@ def create_dataset(dataset, lookBack=1):
 
 def main():
   # Import BTC/USD data
-  url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, str(START_DATE.date()), str(END_DATE.date()), LIMIT, API_KEY)
+  url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
   data = pd.read_csv(url, sep=';')
   print(data)
