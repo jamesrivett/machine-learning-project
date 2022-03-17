@@ -17,8 +17,8 @@ from keras.layers import LSTM
 # REQUEST URL Vars, These are default values. The UI will change them before making the reuquest.
 global COIN_SYMBOL; COIN_SYMBOL = 'BTC'
 global PERIOD_ID; PERIOD_ID = '1DAY'
-global START_DATE; START_DATE = '2020-01-01'
-global END_DATE; END_DATE = '2022-02-01'
+global START_DATE; START_DATE = '2015-01-01'
+global END_DATE; END_DATE = '2016-02-01'
 global LIMIT; LIMIT = 1000
 global API_KEY; API_KEY = '53663783-E96C-4CF7-A3F4-0F8D59946927'
 global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&limit={}&apikey={}&output_format=csv'
@@ -71,6 +71,7 @@ def main():
     testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
   except(Exception):
     print("Not enough data! Choose a larger timeframe or a smaller trading interval.")
+    return
 
   # Build Model
   model = Sequential()
@@ -103,8 +104,8 @@ def main():
   testPredictPlot[:, :] = np.nan
   testPredictPlot[len(trainPredict) + (LOOK_BACK * 2) + 1:len(dataset) - 1, :] = testPredict
   plt.plot(df['rate_open'], label='Actual')
-  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_close"], index=df.index).rate_close, label='Training')
-  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_close"], index=df.index).rate_close, label='Testing')
+  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=df.index).rate_close, label='Training')
+  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=df.index).rate_close, label='Testing')
   plt.legend(loc='best')
   plt.show()
 
