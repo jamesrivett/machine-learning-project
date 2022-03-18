@@ -137,10 +137,10 @@ def doPrediction(btn):
   plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=data['date']).rate_open, label='Training')
   plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=data['date']).rate_open, label='Testing')
   
-  plt.title(label="Coin: {} Epochs: {} Lookback: {} Batchsize: {} ".format(COIN_SYMBOL, NUM_EPOCHS, LOOK_BACK, BATCH_SIZE))
+  plt.title(label="Coin: {} Interval: {} Epochs: {} Lookback: {} Batchsize: {}".format(COIN_SYMBOL, PERIOD_ID, NUM_EPOCHS, LOOK_BACK, BATCH_SIZE))
   plt.legend(loc='best')
   plt.xticks(np.arange(0, len(data['date']), len(data['date']) / 20 ), rotation=80)
-  plt.subplots_adjust(bottom=.265, top=.94)
+  plt.subplots_adjust(bottom=.265, top=.95, left=.1, right=.98)
   plt.xlabel("Date\nTrain RMSE: %.2f Test RMSE: %.2f" % (trainScore, testScore))
   plt.ylabel("Coin Price")
   plt.show()
