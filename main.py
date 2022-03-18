@@ -1,4 +1,5 @@
 # Load Libraries
+from urllib.error import HTTPError
 from appJar import gui
 import numpy as np
 import pandas as pd
@@ -72,16 +73,18 @@ def doPrediction(btn):
   # Import BTC/USD data
   url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
-  data = pd.read_csv(url, sep=';')
+  try:
+    data = pd.read_csv(url, sep=';')
+  except(HTTPError):
+    print("Too many requests to API! Using Default Dataset")
+    data = pd.read_csv('test.csv', sep=';')
   data['date'] = [i[:10] for i in data['time_period_start']]
-  print(data)
 
   # Create Dataframe
   df = deepcopy(data)
   df = df[['rate_open']]
   dataset = df.values
   dataset = dataset.astype('float32')
-  print(dataset)
 
   # Scale Data Frame
   scaler = MinMaxScaler(feature_range=(0, 1))
