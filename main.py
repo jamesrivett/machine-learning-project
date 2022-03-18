@@ -73,7 +73,7 @@ def doPrediction(btn):
   url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
   data = pd.read_csv(url, sep=';')
-  data['datetime'] = pd.to_datetime(data['time_period_start'])
+  data['date'] = [i[:10] for i in data['time_period_start']]
   print(data)
 
   # Create Dataframe
@@ -134,10 +134,12 @@ def doPrediction(btn):
   testPredictPlot[:, :] = np.nan
   testPredictPlot[len(trainPredict) + (LOOK_BACK * 2) + 1:len(dataset) - 1, :] = testPredict
   plt.plot(df['rate_open'], label='Actual')
-  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Training')
-  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=data['time_period_start']).rate_open, label='Testing')
+  plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=data['date']).rate_open, label='Training')
+  plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=data['date']).rate_open, label='Testing')
   plt.legend(loc='best')
-  plt.xticks(np.arange(0, len(data['time_period_start']), len(data['time_period_start']) / 20 ), rotation=85)
+  plt.xticks(np.arange(0, len(data['date']), len(data['date']) / 20 ), rotation=80)
+  plt.subplots_adjust(bottom=.2)
+  plt.title(label="Coin: {} Epochs: {} Lookback: {} Batchsize: {} ".format(COIN_SYMBOL, NUM_EPOCHS, LOOK_BACK, BATCH_SIZE))
   plt.show()
 
 
