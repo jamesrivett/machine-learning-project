@@ -42,13 +42,14 @@ def create_dataset(dataset, lookBack=1):
 
 def main():
   # Import BTC/USD data
-  url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
+  """ url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
   try:
     data = pd.read_csv(url, sep=';')
   except(HTTPError):
     print("Too many requests to API! Using Default Dataset")
-    data = pd.read_csv('test.csv', sep=';')
+    data = pd.read_csv('test.csv', sep=';') """
+  data = pd.read_csv('test.csv', sep=';')
   data['date'] = [i[:10] for i in data['time_period_start']]
 
   # Create Dataframe
