@@ -33,3 +33,16 @@
         - predictions are using the parameters that we found to be the best AFTER our tests
 
     - Hopefully, this will show that our improvements worked across the board, not just for that BTC sample we had
+
+3. COMPUTER SPECS/SOFTWARE VERSIONS
+    - HUGE miss, definitely important to have this
+
+    CPU: Ryzen 7 2700x | 16 Cores (8 Physical, 16 Logical) @ 4.2 GHz Boost Clock
+    GPU: RX 590 | 2304 Stream Processors @ 1545 MHz Boost Clock | 8 GB GDDR5 @ 8000 MHz
+    RAM: 16 GB @ 3200 MHz
+
+
+4. MAKE DIAGRAMS IN DRAW.IO 
+    - The old diagrams were admittedly in PPT, that's on James
+    - That said, they work functionally, so we can leave this one as low-hanging fruit if we have spare time
+
