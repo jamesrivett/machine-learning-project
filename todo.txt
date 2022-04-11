@@ -1,0 +1,35 @@
+======= CODE ======= 
+1. GRAPHS WITH ALL 10 CRYPTOS
+    - Import a dataset of all 10 cryptos (we don't want to keep wasting API calls)
+        - has to be the same timeframe for plot indexing to work
+    
+    - run tests with original parameters for all 10 cryptos
+
+    - run tests with the parameters we found to be the best on all 10 cryptos
+
+    - use these results in REPORT>#2
+
+
+======= REPORT ======= 
+1. FIGURE OUT LaTEX GRAPHS 
+    - This is so we can put our multiple graphs from CODE>#1 into before/after graphs for REPORT>#2
+
+    - matplotlib should be able to spit out the latex code for the graph
+
+    - the issue is, we're gonna have to figure out how to put a bunch of graphs on top of each other
+
+    - the only other way to do it would be to change our code (matplotlib) and make it overlay all the graphs itself
+        - I'd be down, but we'd have to hold the instances of each graph in an array and figure out how to add them all to the graph
+        - idk about you, but I'm not tryna restructure the entire ploting phase of the code to support multiple different graphs at once
+        - probably easier to do it manually
+
+2. SHOW BEFORE/AFTERS FOR ALL 10 CRYPTOS ON THE SAME GRAPH
+    - First graph:
+        - will contain all 10 cryptos
+        - predictions are using the ORIGINAL parameters in the model
+
+    - Second Graph:
+        - will also contain all 10 cryptos
+        - predictions are using the parameters that we found to be the best AFTER our tests
+
+    - Hopefully, this will show that our improvements worked across the board, not just for that BTC sample we had
