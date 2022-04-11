@@ -7,7 +7,7 @@
 
     - run tests with the parameters we found to be the best on all 10 cryptos
 
-    - use these results in REPORT>#2
+    - export latex code and use these results in REPORT>#2
 
 
 ======= REPORT ======= 
@@ -34,6 +34,9 @@
 
     - Hopefully, this will show that our improvements worked across the board, not just for that BTC sample we had
 
+    - Move other graphs to appendix
+        - Probably low-hanging fruit, not the end of the world if we don't have em
+
 3. COMPUTER SPECS/SOFTWARE VERSIONS
     - HUGE miss, definitely important to have this
 
@@ -46,3 +49,10 @@
     - The old diagrams were admittedly in PPT, that's on James
     - That said, they work functionally, so we can leave this one as low-hanging fruit if we have spare time
 
+5. CITE ERROR EVALUATION
+    - Basically: Why is RMSE a good thing to measure with this kind of data?
+
+6. SHIT ON OTHER WORKS IN RELATED WORKS
+    - Kinda self-explanatory
+    
+    - Will take up some room for sure tho
