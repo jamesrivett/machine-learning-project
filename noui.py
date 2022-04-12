@@ -119,6 +119,9 @@ def main():
   plt.subplots_adjust(bottom=.265, top=.95, left=.1, right=.98)
   plt.xlabel("Date\nTrain RMSE: %.2f Test RMSE: %.2f" % (trainScore, testScore))
   plt.ylabel("Coin Price")
+
+  plt.ylim([0, 70000])
+  plt.savefig('test.png', transparent=True)
   plt.show()
 
 if __name__ == "__main__":
