@@ -48,7 +48,7 @@ def getPeriod(period):
   return values[period]
 
 def getSymbol(symbol):
-  values = {"Bitcoin": "BTC",  "Ethereum": "ETH", "Tether": "ETH", "ADA": "ADA",  "DogeCoin": "DOGE", "AVAX":  "AVAX",  "XTZ": "XTZ",  "ShibaCoin": "SHIB",  "DOT": "DOT", "SOL": "SOL"}
+  values = {"Bitcoin": "BTC",  "Ethereum": "ETH", "Tether": "TETH", "ADA": "ADA",  "DogeCoin": "DOGE", "AVAX":  "AVAX",  "XTZ": "XTZ",  "ShibaCoin": "SHIB",  "DOT": "DOT", "SOL": "SOL"}
   return values[symbol]
 
 def doPrediction(btn):
