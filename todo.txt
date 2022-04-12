@@ -12,16 +12,13 @@
 
 ======= REPORT ======= 
 1. FIGURE OUT LaTEX GRAPHS 
-    - This is so we can put our multiple graphs from CODE>#1 into before/after graphs for REPORT>#2
+    - Can't do line graphs with LaTEX code, only histograms
 
-    - matplotlib should be able to spit out the latex code for the graph
-
-    - the issue is, we're gonna have to figure out how to put a bunch of graphs on top of each other
-
-    - the only other way to do it would be to change our code (matplotlib) and make it overlay all the graphs itself
-        - I'd be down, but we'd have to hold the instances of each graph in an array and figure out how to add them all to the graph
-        - idk about you, but I'm not tryna restructure the entire ploting phase of the code to support multiple different graphs at once
-        - probably easier to do it manually
+    - As a workaround:
+        - Lock the Y axis to the largest price (will be BTC @ 70K)
+        - X axis will already be the same since the period is the same 
+        - save the images with transparent background
+        - overlay them in photoshop then add a white background after
 
 2. SHOW BEFORE/AFTERS FOR ALL 10 CRYPTOS ON THE SAME GRAPH
     - First graph:
