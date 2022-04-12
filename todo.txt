@@ -11,7 +11,7 @@
 
 
 ======= REPORT ======= 
-1. FIGURE OUT LaTEX GRAPHS 
+1. FIGURE OUT HOW TO SHOW ALL 10 CRYPTOS AT ONCE IN LaTEX 
     - Can't do line graphs with LaTEX code, only histograms
 
     - As a workaround:
