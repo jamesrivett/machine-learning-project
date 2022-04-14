@@ -1,15 +1,15 @@
-==== <$1 ====
+==== <$5 ====
 - ADA
 - DOGE
-- SOL
 - USDT
-
-==== <$10 ====
-- AVAX
 - SHIB
 - XTZ
 
+==== <$1000 ====
+- AVAX
+- DOT
+- SOL
+
 ==== BIG DOGS ==== 
 - BTC
-- DOT
 - ETH
