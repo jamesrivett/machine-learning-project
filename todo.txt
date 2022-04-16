@@ -1,5 +1,5 @@
 ======= CODE ======= 
-1. GRAPHS WITH ALL 10 CRYPTOS
+1. GRAPHS WITH ALL 10 CRYPTOS (DONE)
     - Import a dataset of all 10 cryptos (we don't want to keep wasting API calls)
         - has to be the same timeframe for plot indexing to work
     
@@ -11,7 +11,7 @@
 
 
 ======= REPORT ======= 
-1. FIGURE OUT HOW TO SHOW ALL 10 CRYPTOS AT ONCE IN LaTEX 
+1. FIGURE OUT HOW TO SHOW ALL 10 CRYPTOS AT ONCE IN LaTEX (DONE; PHOTOSHOP)
     - Can't do line graphs with LaTEX code, only histograms
 
     - As a workaround:
@@ -20,7 +20,7 @@
         - save the images with transparent background
         - overlay them in photoshop then add a white background after
 
-2. SHOW BEFORE/AFTERS FOR ALL 10 CRYPTOS ON THE SAME GRAPH
+2. SHOW BEFORE/AFTERS FOR ALL 10 CRYPTOS ON THE SAME GRAPH (DONE)
     - First graph:
         - will contain all 10 cryptos
         - predictions are using the ORIGINAL parameters in the model
@@ -46,10 +46,10 @@
     - The old diagrams were admittedly in PPT, that's on James
     - That said, they work functionally, so we can leave this one as low-hanging fruit if we have spare time
 
-5. CITE ERROR EVALUATION
+5. CITE ERROR EVALUATION (DONE)
     - Basically: Why is RMSE a good thing to measure with this kind of data?
 
-6. SHIT ON OTHER WORKS IN RELATED WORKS
+6. SHIT ON OTHER WORKS IN RELATED WORKS (IN PROGRESS)
     - Kinda self-explanatory
     
     - Will take up some room for sure tho
