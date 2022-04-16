@@ -26,9 +26,9 @@ global API_KEY2; API_KEY2 = '9117E3A0-8011-4C76-830D-F7BFB6D96199'
 global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&limit={}&apikey={}&output_format=csv'
 
 # Training
-global LOOK_BACK; LOOK_BACK = 10
-global NUM_EPOCHS; NUM_EPOCHS = 400
-global BATCH_SIZE; BATCH_SIZE = 256
+global LOOK_BACK; LOOK_BACK = 6
+global NUM_EPOCHS; NUM_EPOCHS = 300
+global BATCH_SIZE; BATCH_SIZE = 32
 global TT_SPLIT; TT_SPLIT = .67
 
 # convert an array of values into a dataset matrix
@@ -40,7 +40,7 @@ def create_dataset(dataset, lookBack=1):
     dataY.append(dataset[i + lookBack, 0])
   return np.array(dataX), np.array(dataY)
 
-def main():
+def main(TICKER, lim):
   # Import BTC/USD data
   """ url = REQUEST_URL.format(COIN_SYMBOL, PERIOD_ID, START_DATE, END_DATE, LIMIT, API_KEY)
   print(url)
@@ -49,7 +49,7 @@ def main():
   except(HTTPError):
     print("Too many requests to API! Using Default Dataset")
     data = pd.read_csv('test.csv', sep=';') """
-  data = pd.read_csv('test.csv', sep=';')
+  data = pd.read_csv('CSV/%s.csv' % TICKER, sep=';')
   data['date'] = [i[:10] for i in data['time_period_start']]
 
   # Create Dataframe
@@ -113,13 +113,28 @@ def main():
   plt.plot(pd.DataFrame(trainPredictPlot, columns=["rate_open"], index=data['date']).rate_open, label='Training')
   plt.plot(pd.DataFrame(testPredictPlot, columns=["rate_open"], index=data['date']).rate_open, label='Testing')
   
-  plt.title(label="Coin: {} Interval: {} Epochs: {} Lookback: {} Batchsize: {}".format(COIN_SYMBOL, PERIOD_ID, NUM_EPOCHS, LOOK_BACK, BATCH_SIZE))
+  plt.title(label="Coin: {} Interval: {} Epochs: {} Lookback: {} Batchsize: {}".format(TICKER, PERIOD_ID, NUM_EPOCHS, LOOK_BACK, BATCH_SIZE))
   plt.legend(loc='best')
   plt.xticks(np.arange(0, len(data['date']), len(data['date']) / 20 ), rotation=80)
   plt.subplots_adjust(bottom=.265, top=.95, left=.1, right=.98)
   plt.xlabel("Date\nTrain RMSE: %.2f Test RMSE: %.2f" % (trainScore, testScore))
   plt.ylabel("Coin Price")
+
+  #plt.xlim(['2020-01-01', '2022-02-01'])
+  plt.ylim([0, lim])
+  plt.savefig('IMG/after/%s-AFTER.png' % TICKER, transparent=True)
   plt.show()
 
 if __name__ == "__main__":
-    main()
+  tickers0 = ['ADA', 'DOGE', 'USDT', 'SHIB', 'XTZ']
+  tickers1 = ['AVAX', 'SOL', 'DOT']
+  tickers2 = ['BTC', 'ETH']
+
+  for ticker in tickers0:
+    main(ticker, 5)
+
+  for ticker in tickers1:
+    main(ticker, 1000)
+
+  for ticker in tickers2:
+    main(ticker, 70000)
