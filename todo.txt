@@ -6,5 +6,4 @@
     GPU: RX 590 | 2304 Stream Processors @ 1545 MHz Boost Clock | 8 GB GDDR5 @ 8000 MHz
     RAM: 16 GB @ 3200 MHz
 
-
 3. MAKE DIAGRAMS IN DRAW.IO 
