@@ -1,55 +1,10 @@
-======= CODE ======= 
-1. GRAPHS WITH ALL 10 CRYPTOS (DONE)
-    - Import a dataset of all 10 cryptos (we don't want to keep wasting API calls)
-        - has to be the same timeframe for plot indexing to work
-    
-    - run tests with original parameters for all 10 cryptos
-
-    - run tests with the parameters we found to be the best on all 10 cryptos
-
-    - export latex code and use these results in REPORT>#2
-
-
 ======= REPORT ======= 
-1. FIGURE OUT HOW TO SHOW ALL 10 CRYPTOS AT ONCE IN LaTEX (DONE; PHOTOSHOP)
-    - Can't do line graphs with LaTEX code, only histograms
+1. SHIT ON OTHER WORKS IN RELATED WORKS (IN PROGRESS)
 
-    - As a workaround:
-        - Lock the Y axis to the largest price (will be BTC @ 70K)
-        - X axis will already be the same since the period is the same 
-        - save the images with transparent background
-        - overlay them in photoshop then add a white background after
-
-2. SHOW BEFORE/AFTERS FOR ALL 10 CRYPTOS ON THE SAME GRAPH (DONE)
-    - First graph:
-        - will contain all 10 cryptos
-        - predictions are using the ORIGINAL parameters in the model
-
-    - Second Graph:
-        - will also contain all 10 cryptos
-        - predictions are using the parameters that we found to be the best AFTER our tests
-
-    - Hopefully, this will show that our improvements worked across the board, not just for that BTC sample we had
-
-    - Move other graphs to appendix
-        - Probably low-hanging fruit, not the end of the world if we don't have em
-
-3. COMPUTER SPECS/SOFTWARE VERSIONS
-    - HUGE miss, definitely important to have this
-
+2. COMPUTER SPECS/SOFTWARE VERSIONS
     CPU: Ryzen 7 2700x | 16 Cores (8 Physical, 16 Logical) @ 4.2 GHz Boost Clock
     GPU: RX 590 | 2304 Stream Processors @ 1545 MHz Boost Clock | 8 GB GDDR5 @ 8000 MHz
     RAM: 16 GB @ 3200 MHz
 
 
-4. MAKE DIAGRAMS IN DRAW.IO 
-    - The old diagrams were admittedly in PPT, that's on James
-    - That said, they work functionally, so we can leave this one as low-hanging fruit if we have spare time
-
-5. CITE ERROR EVALUATION (DONE)
-    - Basically: Why is RMSE a good thing to measure with this kind of data?
-
-6. SHIT ON OTHER WORKS IN RELATED WORKS (IN PROGRESS)
-    - Kinda self-explanatory
-    
-    - Will take up some room for sure tho
+3. MAKE DIAGRAMS IN DRAW.IO 
