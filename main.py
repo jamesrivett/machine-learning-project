@@ -27,9 +27,9 @@ global API_KEY2; API_KEY2 = '9117E3A0-8011-4C76-830D-F7BFB6D96199'
 global REQUEST_URL; REQUEST_URL = 'https://rest.coinapi.io/v1/exchangerate/{}/USD/history?period_id={}&time_start={}&time_end={}&limit={}&apikey={}&output_format=csv'
 
 # Training
-global LOOK_BACK; LOOK_BACK = 10
-global NUM_EPOCHS; NUM_EPOCHS = 200
-global BATCH_SIZE; BATCH_SIZE = 256
+global LOOK_BACK; LOOK_BACK = 6
+global NUM_EPOCHS; NUM_EPOCHS = 300
+global BATCH_SIZE; BATCH_SIZE = 32
 global TT_SPLIT; TT_SPLIT = .67
 
 app = gui("ML Final Project", " 800x900")
