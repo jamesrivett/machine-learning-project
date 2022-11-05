@@ -108,7 +108,7 @@ def doPrediction(btn):
 
   # Build Model
   model = Sequential()
-  model.add(LSTM(4, input_shape=(1, LOOK_BACK)))
+  model.add(LSTM(5, input_shape=(1, LOOK_BACK)))
   model.add(Dense(1))
   model.compile(loss='mean_squared_error', optimizer='adam')
   model.fit(trainX, trainY, epochs=NUM_EPOCHS, batch_size=BATCH_SIZE, verbose=2)
